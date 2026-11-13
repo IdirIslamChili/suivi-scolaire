@@ -1,0 +1,94 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <h1 class="page-title">Bonjour, {{ parent.civility }} {{ parent.lastName }}</h1>
+    <p class="subtitle">Année scolaire {{ data.schoolYear }} · {{ data.termLabel }}</p>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <section class="section section--first" aria-labelledby="home-alerts">
+    <h2 id="home-alerts" class="section__title">À retenir aujourd’hui</h2>
+
+    @if (absentToday.length > 0) {
+      <a
+        class="alert alert--absence"
+        [routerLink]="
+          absentToday.length === 1 ? ['/tabs/enfants', absentToday[0].child.id] : ['/tabs/enfants']
+        "
+        [queryParams]="absentToday.length === 1 ? { onglet: 'absences' } : {}"
+      >
+        <span class="alert__icon"><ion-icon name="alert-circle" aria-hidden="true" /></span>
+        <span class="alert__text">
+          <strong>
+            {{ absentToday.length }} {{ absentToday.length > 1 ? 'absences' : 'absence' }}
+            aujourd’hui
+          </strong>
+          <span>{{ absenceDetail }}</span>
+        </span>
+        <ion-icon class="alert__chevron" name="chevron-forward" aria-hidden="true" />
+      </a>
+    }
+
+    @if (due; as d) {
+      <a
+        class="alert alert--due"
+        [routerLink]="
+          d.childCount === 1 && firstUnpaidChild
+            ? ['/tabs/enfants', firstUnpaidChild.id]
+            : ['/tabs/enfants']
+        "
+        [queryParams]="d.childCount === 1 ? { onglet: 'paiements' } : {}"
+      >
+        <span class="alert__icon"><ion-icon name="wallet-outline" aria-hidden="true" /></span>
+        <span class="alert__text">
+          <strong>{{ d.count }} {{ d.count > 1 ? 'paiements' : 'paiement' }} à régler</strong>
+          <span>
+            <span class="nowrap">{{ d.total | dzd }}</span>&ngsp;<span class="nowrap"
+              >avant le {{ d.dueDate | date: 'd MMMM' }}</span
+            >
+          </span>
+        </span>
+        <ion-icon class="alert__chevron" name="chevron-forward" aria-hidden="true" />
+      </a>
+    }
+
+    @if (absentToday.length === 0 && !due) {
+      <p class="calm">Rien à signaler aujourd’hui.</p>
+    }
+  </section>
+
+  <section class="section" aria-labelledby="home-children">
+    <h2 id="home-children" class="section__title">Mes enfants</h2>
+
+    @for (item of children; track item.child.id) {
+      <a class="card child" [routerLink]="['/tabs/enfants', item.child.id]">
+        <app-avatar
+          [firstName]="item.child.firstName"
+          [lastName]="item.child.lastName"
+          [tone]="item.child.avatarTone"
+          [size]="56"
+        />
+        <span class="child__body">
+          <strong class="child__name">{{ item.child.firstName }} {{ item.child.lastName }}</strong>
+          <span class="child__class">{{ item.child.className }}</span>
+          @if (item.absenceToday || item.unpaidCount > 0) {
+            <span class="child__chips">
+              @if (item.absenceToday) {
+                <span class="chip chip--absence">
+                  {{ item.child.gender === 'F' ? 'Absente' : 'Absent' }} aujourd’hui
+                </span>
+              }
+              @if (item.unpaidCount > 0) {
+                <span class="chip chip--due">
+                  {{ item.unpaidCount }}
+                  {{ item.unpaidCount > 1 ? 'paiements dus' : 'paiement dû' }}
+                </span>
+              }
+            </span>
+          }
+        </span>
+        <ion-icon class="child__chevron" name="chevron-forward" aria-hidden="true" />
+      </a>
+    }
+  </section>
+</ion-content>

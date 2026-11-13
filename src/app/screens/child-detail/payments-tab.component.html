@@ -1,0 +1,44 @@
+@if (amountDue() > 0) {
+  <section class="summary summary--due summary--stacked" aria-label="Reste à payer">
+    <p class="summary__label">Reste à payer</p>
+    <p class="summary__number summary__number--amount">{{ amountDue() | dzd }}</p>
+    <p class="summary__detail">Échéance le {{ nextDueDate() | date: 'd MMMM y' }}</p>
+  </section>
+} @else {
+  <section class="summary summary--paid summary--stacked" aria-label="Paiements à jour">
+    <p class="summary__label">Paiements à jour</p>
+    <p class="summary__detail">Aucun montant à régler pour le moment.</p>
+  </section>
+}
+
+<section class="section" aria-labelledby="payments-list">
+  <h2 id="payments-list" class="section__title">Frais de scolarité mensuels</h2>
+  <ul class="rows">
+    @for (payment of payments(); track payment.id) {
+      <li class="row">
+        <div class="row__main">
+          <p class="row__title cap-first">{{ payment.period | date: 'MMMM y' }}</p>
+          <p class="row__sub">
+            @if (payment.paidOn) {
+              Payé le {{ payment.paidOn | date: 'd MMMM y' }}
+            } @else {
+              Échéance le {{ payment.dueDate | date: 'd MMMM y' }}
+            }
+          </p>
+        </div>
+        <div class="row__side">
+          <span class="row__amount">{{ payment.amount | dzd }}</span>
+          @if (payment.paidOn) {
+            <span class="chip chip--paid">Payé</span>
+          } @else {
+            <span class="chip chip--due">À payer</span>
+          }
+        </div>
+      </li>
+    }
+  </ul>
+  <p class="footnote">
+    Suivi des paiements uniquement : aucun paiement en ligne. Le règlement se fait auprès de
+    l’administration de l’école.
+  </p>
+</section>

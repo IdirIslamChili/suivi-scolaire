@@ -1,0 +1,55 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <h1 class="page-title">Notifications</h1>
+    <div class="status">
+      <p class="status__count" aria-live="polite">
+        @if (unreadCount() > 0) {
+          {{ unreadCount() }} {{ unreadCount() > 1 ? 'non lues' : 'non lue' }}
+        } @else {
+          Tout est lu
+        }
+      </p>
+      @if (unreadCount() > 0) {
+        <button type="button" class="status__action" (click)="markAllAsRead()">
+          Tout marquer comme lu
+        </button>
+      }
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  @for (group of groups(); track group.day) {
+    <section class="group">
+      <h2 class="group__title cap-first">{{ group.label || (group.day | date: 'EEEE d MMMM') }}</h2>
+      <ul>
+        @for (notification of group.items; track notification.id) {
+          <li>
+            <button
+              type="button"
+              class="notif"
+              [class.notif--unread]="!notification.read"
+              (click)="open(notification)"
+            >
+              <span class="notif__icon" [class]="'notif__icon--' + notification.kind">
+                <ion-icon [name]="kindIcons[notification.kind]" aria-hidden="true" />
+              </span>
+              <span class="notif__body">
+                <span class="notif__title">{{ notification.title }}</span>
+                <span class="notif__text">{{ notification.body }}</span>
+                <span class="notif__meta">
+                  {{ kindLabels[notification.kind] }} · {{ notification.sentAt | date: 'HH:mm' }}
+                </span>
+              </span>
+              @if (!notification.read) {
+                <span class="notif__dot" role="img" aria-label="Non lue"></span>
+              }
+            </button>
+          </li>
+        }
+      </ul>
+    </section>
+  } @empty {
+    <p class="empty">Aucune notification pour le moment.</p>
+  }
+</ion-content>

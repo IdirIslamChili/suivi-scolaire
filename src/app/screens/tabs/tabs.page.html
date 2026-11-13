@@ -1,0 +1,32 @@
+<ion-tabs (ionTabsDidChange)="selected.set($event.tab)">
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="accueil">
+      <ion-icon [name]="selected() === 'accueil' ? 'home' : 'home-outline'" aria-hidden="true" />
+      <ion-label>Accueil</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="enfants">
+      <ion-icon
+        [name]="selected() === 'enfants' ? 'people' : 'people-outline'"
+        aria-hidden="true"
+      />
+      <ion-label>Enfants</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="notifications">
+      <ion-icon
+        [name]="selected() === 'notifications' ? 'notifications' : 'notifications-outline'"
+        aria-hidden="true"
+      />
+      <ion-label>Notifications</ion-label>
+      @if (unreadCount() > 0) {
+        <ion-badge [attr.aria-label]="unreadCount() + ' non lues'">{{ unreadCount() }}</ion-badge>
+      }
+    </ion-tab-button>
+
+    <ion-tab-button tab="profil">
+      <ion-icon [name]="selected() === 'profil' ? 'person' : 'person-outline'" aria-hidden="true" />
+      <ion-label>Profil</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

@@ -1,0 +1,49 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/enfants" text="" aria-label="Retour" />
+    </ion-buttons>
+    @if (child; as c) {
+      <div class="who">
+        <app-avatar
+          [firstName]="c.firstName"
+          [lastName]="c.lastName"
+          [tone]="c.avatarTone"
+          [size]="40"
+        />
+        <div class="who__text">
+          <h1 class="who__name">{{ c.firstName }} {{ c.lastName }}</h1>
+          <p class="who__class">{{ c.className }}</p>
+        </div>
+      </div>
+    }
+  </ion-toolbar>
+
+  @if (child) {
+    <ion-toolbar class="tabs-toolbar">
+      <ion-segment [value]="tab()" (ionChange)="onTabChange($event)">
+        <ion-segment-button value="notes"><ion-label>Notes</ion-label></ion-segment-button>
+        <ion-segment-button value="absences"><ion-label>Absences</ion-label></ion-segment-button>
+        <ion-segment-button value="paiements"><ion-label>Paiements</ion-label></ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  }
+</ion-header>
+
+<ion-content>
+  @if (child; as c) {
+    @switch (tab()) {
+      @case ('notes') {
+        <app-notes-tab [childId]="c.id" />
+      }
+      @case ('absences') {
+        <app-absences-tab [childId]="c.id" />
+      }
+      @case ('paiements') {
+        <app-payments-tab [childId]="c.id" />
+      }
+    }
+  } @else {
+    <p class="missing">Cet élève est introuvable.</p>
+  }
+</ion-content>

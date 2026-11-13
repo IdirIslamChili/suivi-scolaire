@@ -1,0 +1,45 @@
+<section
+  class="hero"
+  aria-labelledby="notes-general"
+  [style.--grade-target.%]="generalAverage() * 5"
+>
+  <div class="hero__top">
+    <h2 id="notes-general" class="hero__label">Moyenne générale</h2>
+    <p class="hero__term">{{ data.termLabel }}</p>
+  </div>
+  <p class="hero__value">
+    <span class="hero__number">{{ generalAverage() | grade }}</span>
+    <span class="hero__max">/20</span>
+  </p>
+  <app-grade-scale [value]="generalAverage()" />
+</section>
+
+<section class="section" aria-labelledby="notes-subjects">
+  <h2 id="notes-subjects" class="section__title">Notes par matière</h2>
+
+  @for (subject of subjects(); track subject.name) {
+    <article class="card subject">
+      <header class="subject__head">
+        <div>
+          <h3 class="subject__name">{{ subject.name }}</h3>
+          <p class="subject__hint">Moyenne de la matière</p>
+        </div>
+        <p class="subject__average">{{ subject.average | grade }}<small>/20</small></p>
+      </header>
+
+      <app-grade-scale [value]="subject.average" />
+
+      <ul class="marks">
+        @for (assessment of subject.assessments; track assessment.label) {
+          <li class="mark">
+            <span class="mark__label">{{ assessment.label }}</span>
+            <span class="mark__date">{{ assessment.date | date: 'd MMM' }}</span>
+            <span class="mark__score">{{ assessment.score | grade }}<small>/20</small></span>
+          </li>
+        }
+      </ul>
+    </article>
+  } @empty {
+    <p class="empty">Aucune note pour le moment.</p>
+  }
+</section>

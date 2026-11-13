@@ -1,0 +1,48 @@
+<ion-content>
+  <main class="login">
+    <header class="brand">
+      <span class="brand__mark"><ion-icon name="school" aria-hidden="true" /></span>
+      <h1 class="brand__name">Suivi Scolaire</h1>
+      <p class="brand__tagline">Notes, absences et paiements de vos enfants, au même endroit.</p>
+    </header>
+
+    <form class="form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <ion-input
+        formControlName="email"
+        type="email"
+        inputmode="email"
+        autocomplete="email"
+        fill="outline"
+        label="Adresse e-mail"
+        labelPlacement="stacked"
+        placeholder="nom@exemple.com"
+        (keyup.enter)="submit()"
+      />
+      <ion-input
+        formControlName="password"
+        type="password"
+        autocomplete="current-password"
+        fill="outline"
+        label="Mot de passe"
+        labelPlacement="stacked"
+        placeholder="Votre mot de passe"
+        (keyup.enter)="submit()"
+      >
+        <ion-input-password-toggle slot="end" />
+      </ion-input>
+
+      @if (error()) {
+        <p class="form__error" role="alert">{{ error() }}</p>
+      }
+
+      <ion-button type="submit" expand="block">Se connecter</ion-button>
+    </form>
+
+    <p class="separator"><span>ou</span></p>
+
+    <ion-button class="demo-button" expand="block" fill="outline" (click)="useDemoAccount()">
+      Compte démo parent
+    </ion-button>
+    <p class="demo-note">Version de démonstration : toutes les données affichées sont fictives.</p>
+  </main>
+</ion-content>

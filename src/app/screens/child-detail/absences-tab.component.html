@@ -1,0 +1,45 @@
+@if (absences().length > 0) {
+  <section class="summary summary--absence" aria-label="Total des absences">
+    <p class="summary__number">{{ absences().length }}</p>
+    <div>
+      <p class="summary__label">
+        {{ absences().length > 1 ? 'absences' : 'absence' }} ce trimestre
+      </p>
+      <p class="summary__detail">
+        {{ justifiedCount() }} {{ justifiedCount() > 1 ? 'justifiées' : 'justifiée' }} ·
+        {{ unjustifiedCount() }} {{ unjustifiedCount() > 1 ? 'non justifiées' : 'non justifiée' }}
+      </p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="absences-list">
+    <h2 id="absences-list" class="section__title">Détail des absences</h2>
+    <ul class="rows">
+      @for (absence of absences(); track absence.id) {
+        <li class="row">
+          <div class="row__main">
+            @if (absence.date === data.today) {
+              <span class="row__flag">Aujourd’hui</span>
+            }
+            <p class="row__title cap-first">{{ absence.date | date: 'EEEE d MMMM y' }}</p>
+            <p class="row__sub">
+              {{ absence.duration }} · {{ absence.reason ?? 'Aucun justificatif reçu' }}
+            </p>
+          </div>
+          @if (absence.justified) {
+            <span class="chip chip--neutral">Justifiée</span>
+          } @else {
+            <span class="chip chip--absence">Non justifiée</span>
+          }
+        </li>
+      }
+    </ul>
+  </section>
+} @else {
+  <section class="summary">
+    <div>
+      <p class="summary__label">Aucune absence ce trimestre</p>
+      <p class="summary__detail">Toutes les absences signalées par l’école apparaîtront ici.</p>
+    </div>
+  </section>
+}

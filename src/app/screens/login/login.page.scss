@@ -1,0 +1,120 @@
+ion-content {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: calc(var(--ion-safe-area-top, 0px) + 24px);
+  --padding-bottom: 24px;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.brand {
+  margin: 0 0 28px;
+  padding: 28px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 24px;
+  background: linear-gradient(135deg, #1e3a8a 0%, #4338ca 58%, #7c3aed 115%);
+  box-shadow: 0 18px 38px rgba(30, 58, 138, 0.22);
+}
+
+.brand__mark {
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 20px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font-size: 32px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.32);
+}
+
+.brand__name {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: #fff;
+  font-family: 'Poppins', 'Inter Variable', sans-serif;
+}
+
+.brand__tagline {
+  margin-top: 8px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+ion-input {
+  --border-color: rgba(30, 58, 138, 0.16);
+  --border-radius: 14px;
+  --background: rgba(255, 255, 255, 0.72);
+  --highlight-color-focused: var(--app-blue);
+  --placeholder-color: var(--app-ink-3);
+  --placeholder-opacity: 1;
+  min-height: 56px;
+  font-size: 1rem;
+}
+
+.form__error {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #f1f5f9;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--app-ink);
+}
+
+ion-button {
+  --border-radius: 12px;
+  --box-shadow: none;
+  min-height: 52px;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.demo-button {
+  --border-width: 1.5px;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  font-size: 0.875rem;
+  color: var(--app-ink-3);
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--app-line);
+  }
+}
+
+.demo-note {
+  margin-top: 12px;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--app-ink-3);
+}

@@ -1,0 +1,48 @@
+// Design tokens. Colours have a fixed meaning across the whole app:
+//   blue   -> brand, navigation, grades
+//   green  -> "Payé"
+//   orange -> "À payer"
+//   red    -> absences
+:root {
+  --app-blue: #1e3a8a;
+  --app-blue-soft: #eef2fb;
+  --app-indigo: #4f46e5;
+  --app-violet: #7c3aed;
+  --app-shadow-card: 0 8px 24px rgba(30, 58, 138, 0.07), 0 2px 5px rgba(15, 23, 42, 0.04);
+  --app-ink: #0f172a;
+  --app-ink-2: #64748b;
+  --app-ink-3: #64748b;
+  --app-line: #e2e8f0;
+  --app-surface: #f8fafc;
+
+  --app-green: #16a34a;
+  --app-green-soft: #dcfce7;
+  --app-orange: #ea580c;
+  --app-orange-strong: #ea580c;
+  --app-orange-soft: #ffedd5;
+  --app-red: #dc2626;
+  --app-red-soft: #fee2e2;
+
+  --app-radius: 20px;
+  --app-gutter: 16px;
+
+  // Ionic theme
+  --ion-font-family: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --ion-background-color: transparent;
+  --ion-text-color: #0f172a;
+  --ion-text-color-rgb: 15, 23, 42;
+
+  --ion-color-primary: #1e3a8a;
+  --ion-color-primary-rgb: 30, 58, 138;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #1a3379;
+  --ion-color-primary-tint: #354e96;
+
+  --ion-toolbar-background: transparent;
+  --ion-toolbar-color: #0f172a;
+  --ion-tab-bar-background: rgba(255, 255, 255, 0.88);
+  --ion-tab-bar-border-color: #e2e8f0;
+  --ion-tab-bar-color: #64748b;
+  --ion-tab-bar-color-selected: #1e3a8a;
+}

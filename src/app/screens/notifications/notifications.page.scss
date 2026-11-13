@@ -1,0 +1,136 @@
+ion-toolbar {
+  --padding-top: 18px;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 32px;
+  margin-top: 2px;
+}
+
+.status__count {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.status__action {
+  margin-right: -8px;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #fff;
+
+  &:active {
+    background: var(--app-blue-soft);
+  }
+}
+
+.group {
+  margin-top: 20px;
+
+  &:first-child {
+    margin-top: 8px;
+  }
+}
+
+.group__title {
+  margin-bottom: 4px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--app-ink-3);
+}
+
+.notif {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 0;
+  border: 0;
+  border-bottom: 1px solid var(--app-line);
+  background: none;
+  font: inherit;
+  text-align: left;
+  color: var(--app-ink);
+}
+
+.notif__icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  font-size: 22px;
+}
+
+.notif__icon--homework,
+.notif__icon--test {
+  background: var(--app-blue-soft);
+  color: var(--app-blue);
+}
+
+.notif__icon--payment {
+  background: var(--app-orange-soft);
+  color: var(--app-orange);
+}
+
+.notif__icon--absence {
+  background: var(--app-red-soft);
+  color: var(--app-red);
+}
+
+.notif__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.notif__title {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.notif--unread .notif__title {
+  font-weight: 800;
+}
+
+.notif__text {
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--app-ink-2);
+}
+
+.notif__meta {
+  margin-top: 4px;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--app-ink-3);
+}
+
+.notif__dot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: var(--app-blue);
+}
+
+.empty {
+  margin-top: 16px;
+  color: var(--app-ink-2);
+}

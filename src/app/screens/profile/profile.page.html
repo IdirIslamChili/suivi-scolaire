@@ -1,0 +1,70 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <h1 class="page-title">Profil</h1>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <section class="me">
+    <app-avatar
+      [firstName]="parent.firstName"
+      [lastName]="parent.lastName"
+      tone="navy"
+      [size]="72"
+    />
+    <div>
+      <h2 class="me__name">{{ parent.firstName }} {{ parent.lastName }}</h2>
+      <p class="me__role">Parent d’élève</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="profile-contact">
+    <h2 id="profile-contact" class="section__title">Coordonnées</h2>
+    <ul class="rows">
+      <li class="field">
+        <ion-icon name="call-outline" aria-hidden="true" />
+        <div>
+          <p class="field__label">Téléphone</p>
+          <p class="field__value">{{ parent.phone }}</p>
+        </div>
+      </li>
+      <li class="field">
+        <ion-icon name="mail-outline" aria-hidden="true" />
+        <div>
+          <p class="field__label">E-mail</p>
+          <p class="field__value">{{ parent.email }}</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="profile-children">
+    <h2 id="profile-children" class="section__title">Enfants rattachés</h2>
+    <ul class="rows">
+      @for (child of children; track child.id) {
+        <li>
+          <a class="linked" [routerLink]="['/tabs/enfants', child.id]">
+            <app-avatar
+              [firstName]="child.firstName"
+              [lastName]="child.lastName"
+              [tone]="child.avatarTone"
+              [size]="44"
+            />
+            <span class="linked__text">
+              <strong>{{ child.firstName }} {{ child.lastName }}</strong>
+              <span>{{ child.className }}</span>
+            </span>
+            <ion-icon name="chevron-forward" aria-hidden="true" />
+          </a>
+        </li>
+      }
+    </ul>
+  </section>
+
+  <ion-button class="logout" expand="block" fill="outline" (click)="logout()">
+    <ion-icon slot="start" name="log-out-outline" aria-hidden="true" />
+    Se déconnecter
+  </ion-button>
+
+  <p class="footnote about">Suivi Scolaire 1.0 · Compte et données de démonstration</p>
+</ion-content>

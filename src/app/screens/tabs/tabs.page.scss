@@ -1,0 +1,45 @@
+ion-tab-bar {
+  --border: 1px solid rgba(255, 255, 255, 0.76);
+  --background: rgba(255, 255, 255, 0.84);
+  width: calc(100% - 32px);
+  height: 64px;
+  margin: 0 16px max(12px, env(safe-area-inset-bottom));
+  padding: 3px 4px 0;
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-radius: 24px;
+  box-shadow:
+    0 12px 32px rgba(30, 58, 138, 0.14),
+    0 2px 8px rgba(15, 23, 42, 0.05);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+ion-tab-button {
+  --ripple-color: var(--app-blue);
+  font-family: inherit;
+}
+
+ion-label {
+  margin-top: 3px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+ion-icon {
+  font-size: 23px;
+}
+
+ion-tab-button.tab-selected::part(native)::before {
+  top: 6px;
+  width: 42px;
+  height: 30px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(30, 58, 138, 0.14), rgba(124, 58, 237, 0.16));
+}
+
+ion-badge {
+  --background: #dc2626;
+  --color: #fff;
+  font-weight: 800;
+}

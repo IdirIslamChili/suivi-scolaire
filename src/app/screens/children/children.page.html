@@ -1,0 +1,70 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <h1 class="page-title">Mes enfants</h1>
+    <p class="subtitle">{{ data.termLabel }} - {{ data.schoolYear.replace('–', '-') }}</p>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="list">
+    @for (item of children; track item.child.id) {
+      <a class="card kid" [routerLink]="['/tabs/enfants', item.child.id]">
+        <span class="kid__head">
+          <app-avatar
+            [firstName]="item.child.firstName"
+            [lastName]="item.child.lastName"
+            [tone]="item.child.avatarTone"
+            [size]="56"
+          />
+          <span class="kid__identity">
+            <strong class="kid__name">{{ item.child.firstName }} {{ item.child.lastName }}</strong>
+            <span class="kid__class">{{ item.child.className }}</span>
+          </span>
+          <ion-icon class="kid__chevron" name="chevron-forward" aria-hidden="true" />
+        </span>
+
+        <span class="kid__stats">
+          <span class="stat">
+            <span class="stat__label">Moyenne</span>
+            <span
+              class="stat__value stat__value--grade"
+              role="img"
+              [style.--ring-end]="169.646 * (1 - item.average / 20)"
+              [attr.aria-label]="(item.average | grade) + ' sur 20'"
+            >
+              <svg class="grade-ring" viewBox="0 0 64 64" aria-hidden="true">
+                <circle class="grade-ring__track" cx="32" cy="32" r="26.5" />
+                <circle
+                  class="grade-ring__progress"
+                  cx="32"
+                  cy="32"
+                  r="26.5"
+                  stroke-dasharray="169.646"
+                  stroke-dashoffset="169.646"
+                />
+              </svg>
+              <span class="grade-ring__text">{{ item.average | grade }}<small>/20</small></span>
+            </span>
+          </span>
+          <span class="stat">
+            <span class="stat__label">Absences</span>
+            <span class="stat__value" [class.stat__value--absence]="item.absenceCount > 0">
+              {{ item.absenceCount }}
+            </span>
+          </span>
+          <span class="stat">
+            @if (item.amountDue > 0) {
+              <span class="stat__label">À payer</span>
+              <span class="stat__value stat__value--due">
+                {{ item.amountDue | dzd: false }}<small>DA</small>
+              </span>
+            } @else {
+              <span class="stat__label">Paiements</span>
+              <span class="stat__value stat__value--paid">À jour</span>
+            }
+          </span>
+        </span>
+      </a>
+    }
+  </div>
+</ion-content>
